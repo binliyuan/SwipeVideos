@@ -1,4 +1,4 @@
-package com.lentimosystems.swipevideos;
+package com.deepscience.business;
 
 import org.junit.Test;
 

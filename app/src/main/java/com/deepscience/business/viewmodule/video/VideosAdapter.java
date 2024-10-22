@@ -1,4 +1,4 @@
-package com.lentimosystems.swipevideos;
+package com.deepscience.business.viewmodule.video;
 
 import android.media.MediaPlayer;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.deepscience.business.R;
 
 import java.util.List;
 
