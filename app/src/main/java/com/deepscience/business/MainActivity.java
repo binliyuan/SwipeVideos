@@ -22,8 +22,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 //    ApplicationComponent appComponent;
     CameraBase previewSurfaceShowCamera;
-    VideoView video;
-    String videoPath = "https://www.w3schools.com/html/mov_bbb.mp4";
+    VideoView video1;
+    VideoView video2;
+    String videoPath1 = "https://media.w3.org/2010/05/sintel/trailer.mp4";
+    String videoPath2 = "https://www.w3schools.com/html/mov_bbb.mp4";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,23 +36,23 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 
         final SurfaceView surfaceView = findViewById(R.id.surfaceView);
-        video = findViewById(R.id.videoView);
-        video.setVideoURI(Uri.parse(videoPath));
-        video.setOnPreparedListener(mp -> {
+        video1 = findViewById(R.id.videoView2);
+        video1.setVideoURI(Uri.parse(videoPath2));
+        video1.setOnPreparedListener(mp -> {
             mp.start();
 
             float videoRatio = mp.getVideoWidth() / (float)mp.getVideoHeight();
-            float screenRatio = video.getWidth() / (float)video.getHeight();
+            float screenRatio = video1.getWidth() / (float)video1.getHeight();
             float scale  = videoRatio / screenRatio;
             if (scale >= 1f){
-                video.setScaleX(scale);
+                video1.setScaleX(scale);
             }else {
-                video.setScaleY(1f / scale);
+                video1.setScaleY(1f / scale);
             }
-            video.start(); // 视频准备好后自动开始播放
+            video1.start(); // 视频准备好后自动开始播放
         });
 
-        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        video1.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 mp.start();
@@ -59,14 +61,36 @@ public class MainActivity extends AppCompatActivity {
 
         previewSurfaceShowCamera = new PreviewSurfaceShowCamera(surfaceView, this);
         previewSurfaceShowCamera.startBackgroundThread();
-        final ViewPager2 videosViewPager = findViewById(R.id.viewPagerVideos);
-        List<VideoItem> videoItems = new ArrayList<>();
-        VideoItem item = new VideoItem();
-        item.videoURL = "https://media.w3.org/2010/05/sintel/trailer.mp4";
-        item.videoTitle = "";
-        item.videoDesc = "";
-        videoItems.add(item);
-        videosViewPager.setAdapter(new VideosAdapter(videoItems));
+        video2 = findViewById(R.id.videoView1);
+        video2.setVideoURI(Uri.parse(videoPath1));
+        video2.setOnPreparedListener(mp -> {
+            mp.start();
+
+            float videoRatio = mp.getVideoWidth() / (float)mp.getVideoHeight();
+            float screenRatio = video2.getWidth() / (float)video2.getHeight();
+            float scale  = videoRatio / screenRatio;
+            if (scale >= 1f){
+                video2.setScaleX(scale);
+            }else {
+                video2.setScaleY(1f / scale);
+            }
+            video2.start(); // 视频准备好后自动开始播放
+        });
+
+        video2.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.start();
+            }
+        });
+//        final ViewPager2 videosViewPager = findViewById(R.id.viewPagerVideos);
+//        List<VideoItem> videoItems = new ArrayList<>();
+//        VideoItem item = new VideoItem();
+//        item.videoURL = "https://media.w3.org/2010/05/sintel/trailer.mp4";
+//        item.videoTitle = "";
+//        item.videoDesc = "";
+//        videoItems.add(item);
+//        videosViewPager.setAdapter(new VideosAdapter(videoItems));
     }
 
 
